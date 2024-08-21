@@ -3,14 +3,26 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Shi0-X/fullstack-project-98/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Shi0-X/fullstack-project-98/actions)",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint ."
+  },
   "author": "Tu Nombre",
   "license": "ISC",
   "type": "module",
   "bin": {
-    "brain-games": "bin/brain-games.js"
-  },
+  "brain-games": "bin/brain-games.js",
+  "brain-even": "bin/brain-even.js",
+  "brain-calc": "bin/brain-calc.js"
+},
   "dependencies": {
-    "link": "^2.1.1"
+    "link": "^2.1.1",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "globals": "^15.9.0"
   }
 }
