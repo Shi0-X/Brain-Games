@@ -1,15 +1,16 @@
 {
   "name": "@codica/code.",
   "version": "1.0.0",
-  
   "description": "[![Actions Status](https://github.com/Shi0-X/fullstack-project-98/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Shi0-X/fullstack-project-98/actions)",
   "main": "index.js",
-   "scripts": {
-  },
+  "scripts": {},
   "author": "Tu Nombre",
   "license": "ISC",
   "type": "module",
   "bin": {
     "brain-games": "bin/brain-games.js"
+  },
+  "dependencies": {
+    "link": "^2.1.1"
   }
 }
