@@ -5,9 +5,6 @@
   "description": "[![Actions Status](https://github.com/Shi0-X/fullstack-project-98/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Shi0-X/fullstack-project-98/actions)",
   "main": "index.js",
    "scripts": {
-    "install": "npm ci",
-    "brain-games": "node bin/brain-games.js",
-    "publish": "npm publish --dry-run"
   },
   "author": "Tu Nombre",
   "license": "ISC",
