@@ -17,3 +17,7 @@ https://youtu.be/UKmGgq8Br-g
 ### Preview of MCD:
 
 https://www.youtube.com/watch?v=UoZD54oGQ9w
+
+### Preview of arithmetic progression:
+
+https://youtu.be/1J7dNJr2OdU
