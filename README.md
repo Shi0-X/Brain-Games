@@ -21,3 +21,7 @@ https://www.youtube.com/watch?v=UoZD54oGQ9w
 ### Preview of arithmetic progression:
 
 https://youtu.be/1J7dNJr2OdU
+
+### Preview of prime numbers:
+
+https://youtu.be/xkp5VSG9Bo4
