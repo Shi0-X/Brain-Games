@@ -6,6 +6,10 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5458039c6b4cb1634031/maintainability)](https://codeclimate.com/github/Shi0-X/fullstack-project-98/maintainability)
 
-### First test of how it works:
+### First test of how it works with parity:
 
 https://www.youtube.com/watch?v=YQdos6mM59k
+
+### Preview of calculator:
+
+https://youtu.be/UKmGgq8Br-g
