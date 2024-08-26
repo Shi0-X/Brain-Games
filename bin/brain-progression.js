@@ -1,14 +1,36 @@
 #!/usr/bin/env node
 
-import runGame from '../src/index.js';
 import readlineSync from 'readline-sync';
 
 function generarProgresion(longitud, diferencia, inicio, oculto) {
-  const progresion = [];
-  for (let i = 0; i < longitud; i++) {
-    progresion.push(i === oculto ? '..' : inicio + i * diferencia);
-  }
-  return progresion;
+  return Array.from({ length: longitud }, (_, i) =>
+    i === oculto ? '..' : inicio + i * diferencia
+  );
+}
+
+function obtenerDatosJuego() {
+  return {
+    longitud: Math.floor(Math.random() * 5) + 5,
+    diferencia: Math.floor(Math.random() * 10) + 1,
+    inicio: Math.floor(Math.random() * 10) + 1,
+    oculto: Math.floor(Math.random() * (Math.floor(Math.random() * 5) + 5))
+  };
+}
+
+function validarRespuesta(respuesta, respuestaCorrecta) {
+  return respuesta == respuestaCorrecta;
+}
+
+function mostrarPregunta(progresion) {
+  console.log(`Pregunta: ${progresion.join(' ')}`);
+  return readlineSync.question('Tu respuesta: ');
+}
+
+function mostrarResultado(aciertos, nombre) {
+  const mensajeFinal = aciertos === 3 
+    ? `¡Felicidades ${nombre}, Terminaste el juego!` 
+    : `¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`;
+  console.log(mensajeFinal);
 }
 
 function jugar() {
@@ -21,18 +43,13 @@ function jugar() {
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 3) {
-    const longitud = Math.floor(Math.random() * 5) + 5;
-    const diferencia = Math.floor(Math.random() * 10) + 1;
-    const inicio = Math.floor(Math.random() * 10) + 1;
-    const oculto = Math.floor(Math.random() * longitud);
-
+    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego();
     const progresion = generarProgresion(longitud, diferencia, inicio, oculto);
     const respuestaCorrecta = inicio + oculto * diferencia;
 
-    console.log(`Pregunta: ${progresion.join(' ')}`);
-    const respuesta = readlineSync.question('Tu respuesta: ');
+    const respuesta = mostrarPregunta(progresion);
 
-    if (respuesta == respuestaCorrecta) {
+    if (validarRespuesta(respuesta, respuestaCorrecta)) {
       console.log('¡Correcto!');
       aciertos++;
     } else {
@@ -41,11 +58,7 @@ function jugar() {
     }
   }
 
-  const mensajeFinal = aciertos === 3 
-    ? `¡Felicidades ${nombre}, Terminaste el juego!` 
-    : `¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`;
-
-  console.log(mensajeFinal);
+  mostrarResultado(aciertos, nombre);
 }
 
 jugar();
