@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import runGame from '../src/index.js';
 import readlineSync from 'readline-sync';
 
 function esPrimo(num) {
@@ -27,20 +26,40 @@ function mostrarResultadoFinal(nombre, aciertos) {
   }
 }
 
-function jugar() {
+function mostrarIntroduccion() {
   console.log('¡Bienvenido a Brain Games!');
   const nombre = readlineSync.question('¿Cuál es tu nombre? ');
   console.log(`¡Hola, ${nombre}!`);
   console.log('Responde "yes" si el número dado es primo. De lo contrario, responde "no".');
+  return nombre;
+}
+
+function generarNumeroAleatorio() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
+function procesarRonda() {
+  const num = generarNumeroAleatorio();
+  const respuesta = obtenerRespuestaUsuario(num);
+  const esRespuestaCorrecta = validarRespuesta(respuesta, num);
+
+  return {
+    num,
+    respuesta,
+    esRespuestaCorrecta,
+  };
+}
+
+function jugar() {
+  const nombre = mostrarIntroduccion();
 
   let aciertos = 0;
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 3) {
-    const num = Math.floor(Math.random() * 100) + 1;
-    const respuesta = obtenerRespuestaUsuario(num);
+    const { num, respuesta, esRespuestaCorrecta } = procesarRonda();
 
-    if (validarRespuesta(respuesta, num)) {
+    if (esRespuestaCorrecta) {
       console.log('¡Correcto!');
       aciertos++;
     } else {
