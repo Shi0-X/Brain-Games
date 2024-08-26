@@ -11,9 +11,25 @@ function esPrimo(num) {
   return true;
 }
 
+function obtenerRespuestaUsuario(num) {
+  return readlineSync.question(`Pregunta: ${num}\nTu respuesta: `).toLowerCase();
+}
+
+function validarRespuesta(respuesta, num) {
+  return (respuesta === 'yes' && esPrimo(num)) || (respuesta === 'no' && !esPrimo(num));
+}
+
+function mostrarResultadoFinal(nombre, aciertos) {
+  if (aciertos === 3) {
+    console.log(`¡Felicidades, ${nombre}, Terminaste el juego!`);
+  } else {
+    console.log(`¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`);
+  }
+}
+
 function jugar() {
   console.log('¡Bienvenido a Brain Games!');
-  const nombre = readlineSync.question('¿Cual es tu nombre? ');
+  const nombre = readlineSync.question('¿Cuál es tu nombre? ');
   console.log(`¡Hola, ${nombre}!`);
   console.log('Responde "yes" si el número dado es primo. De lo contrario, responde "no".');
 
@@ -22,12 +38,9 @@ function jugar() {
 
   while (aciertos < 3 && fallas < 3) {
     const num = Math.floor(Math.random() * 100) + 1;
-    const respuesta = readlineSync.question(`Pregunta: ${num}\nTu respuesta: `);
+    const respuesta = obtenerRespuestaUsuario(num);
 
-    if (respuesta.toLowerCase() === 'yes' && esPrimo(num)) {
-      console.log('¡Correcto!');
-      aciertos++;
-    } else if (respuesta.toLowerCase() === 'no' && !esPrimo(num)) {
+    if (validarRespuesta(respuesta, num)) {
       console.log('¡Correcto!');
       aciertos++;
     } else {
@@ -36,11 +49,7 @@ function jugar() {
     }
   }
 
-  if (aciertos === 3) {
-    console.log(`¡Felicidades, ${nombre}, Terminaste el juego!`);
-  } else {
-    console.log(`¡Lo siento, ${nombre}! ¡Recuerda que siempre puede intentarlo de nuevo, no te rindas!`);
-  }
+  mostrarResultadoFinal(nombre, aciertos);
 }
 
 jugar();
