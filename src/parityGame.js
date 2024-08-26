@@ -20,29 +20,12 @@ const checkAnswer = (userAnswer, correctAnswer) => {
   }
 };
 
-// Función para iniciar el juego
-const startGame = () => {
+// Función principal para jugar el juego
+const playParityGame = () => {
   console.log('¡Bienvenido a Brain Games!');
   const name = readlineSync.question('¿Cuál es tu nombre? ');
   console.log(`¡Hola, ${name}!`);
   console.log('Responde "yes" si el número es par, de lo contrario responde "no".');
-  return name;
-};
-
-// Función para manejar una ronda del juego
-const playRound = (name) => {
-  const number = getRandomNumber();
-  console.log(`Pregunta: ${number}`);
-  const userAnswer = getUserAnswer();
-
-  const correctAnswer = isEven(number) ? 'yes' : 'no';
-  
-  return checkAnswer(userAnswer, correctAnswer);
-};
-
-// Función principal para jugar el juego
-const playParityGame = () => {
-  const name = startGame();
 
   let correctAnswers = 0;
   let incorrectAnswers = 0;
@@ -50,7 +33,13 @@ const playParityGame = () => {
   const maxIncorrectAnswers = 3;
 
   while (correctAnswers < maxCorrectAnswers && incorrectAnswers < maxIncorrectAnswers) {
-    if (playRound(name)) {
+    const number = getRandomNumber();
+    console.log(`Pregunta: ${number}`);
+    const userAnswer = getUserAnswer();
+
+    const correctAnswer = isEven(number) ? 'yes' : 'no';
+    
+    if (checkAnswer(userAnswer, correctAnswer)) {
       correctAnswers += 1;
     } else {
       incorrectAnswers += 1;
@@ -59,9 +48,9 @@ const playParityGame = () => {
   }
 
   if (correctAnswers === maxCorrectAnswers) {
-    console.log(`¡Felicidades, ${name}!`);
+    console.log(`¡Felicidades, ${name}, Terminaste el juego!`);
   } else {
-    console.log(`Lo siento, ${name}. Has fallado ${incorrectAnswers} veces. Inténtalo de nuevo.`);
+    console.log(`Lo siento, ${name}. Has fallado ${incorrectAnswers} veces. Recuerda que siempre puedes intentarlo de nuevo.`);
   }
 };
 
