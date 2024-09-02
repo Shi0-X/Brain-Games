@@ -28,9 +28,8 @@ const playParityGame = () => {
 
   let correctAnswers = 0;
   const maxCorrectAnswers = 3;
-  const maxIncorrectAnswers = 1; // Modificado para finalizar después de 1 error
 
-  while (correctAnswers < maxCorrectAnswers) { // Cambiado para finalizar al alcanzar 3 respuestas correctas
+  while (correctAnswers < maxCorrectAnswers) {
     const number = getRandomNumber();
     console.log(`Pregunta: ${number}`);
     const userAnswer = getUserAnswer();
@@ -41,11 +40,11 @@ const playParityGame = () => {
       correctAnswers += 1;
     } else {
       console.log(`¡Intentémoslo de nuevo, ${name}!`);
-      return; // Añadido para finalizar el juego inmediatamente después de un error
+      return; // Finaliza el juego inmediatamente después de un error
     }
   }
 
-  console.log(`¡Felicidades, ${name}, Terminaste el juego con 3 respuestas correctas!`);
+  console.log(`¡Felicidades, ${name}, terminaste el juego con 3 respuestas correctas!`);
 };
 
 export default playParityGame;

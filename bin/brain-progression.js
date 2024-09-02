@@ -2,12 +2,14 @@
 
 import readlineSync from 'readline-sync';
 
+// Genera una progresión aritmética con un elemento oculto
 function generarProgresion(longitud, diferencia, inicio, oculto) {
   return Array.from({ length: longitud }, (_, i) =>
     i === oculto ? '..' : inicio + i * diferencia
   );
 }
 
+// Obtiene datos aleatorios para el juego
 function obtenerDatosJuego() {
   const longitud = Math.floor(Math.random() * 5) + 5;
   const diferencia = Math.floor(Math.random() * 10) + 1;
@@ -17,19 +19,22 @@ function obtenerDatosJuego() {
     longitud,
     diferencia,
     inicio,
-    oculto
+    oculto,
   };
 }
 
+// Valida si la respuesta del usuario es correcta
 function validarRespuesta(respuesta, respuestaCorrecta) {
   return Number(respuesta) === respuestaCorrecta;
 }
 
+// Muestra la pregunta al usuario y obtiene su respuesta
 function mostrarPregunta(progresion) {
   console.log(`Pregunta: ${progresion.join(' ')}`);
   return readlineSync.question('Tu respuesta: ');
 }
 
+// Muestra el resultado final del juego
 function mostrarResultado(aciertos, fallas, nombre) {
   if (fallas >= 1) {
     console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
@@ -40,6 +45,7 @@ function mostrarResultado(aciertos, fallas, nombre) {
   }
 }
 
+// Función principal para jugar el juego
 function jugar() {
   console.log('¡Bienvenido a Brain Games!');
   const nombre = readlineSync.question('¿Cuál es tu nombre? ');
