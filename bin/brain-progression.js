@@ -4,9 +4,9 @@ import readlineSync from 'readline-sync';
 
 // Genera una progresión aritmética con un elemento oculto
 function generarProgresion(longitud, diferencia, inicio, oculto) {
-  return Array.from({ length: longitud }, (_, i) =>
+  return Array.from({ length: longitud }, (_, i) => (
     i === oculto ? '..' : inicio + i * diferencia
-  );
+  ));
 }
 
 // Obtiene datos aleatorios para el juego
@@ -75,4 +75,3 @@ function jugar() {
 }
 
 jugar();
-
