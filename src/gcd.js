@@ -1,30 +1,23 @@
 import readlineSync from 'readline-sync';
-// import runGame from './index.js'; // Eliminado porque no se utiliza
 
 let aciertos = 0;
 let fallas = 0;
 
-const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
+const calcularMCD = (a, b) => b === 0 ? a : calcularMCD(b, a % b);
 
-// Reemplazado bucle for por .map() para evitar el uso de bucles directos
-const generarPreguntas = (cantidad) => {
-  return Array.from({ length: cantidad }, () => {
+const generarPreguntas = (cantidad) => 
+  Array.from({ length: cantidad }, () => {
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     return { num1, num2, mcd: calcularMCD(num1, num2) };
   });
-};
 
-const solicitarRespuesta = (pregunta) => {
-  // Línea ajustada para no exceder el límite de caracteres
-  return readlineSync.question(
-    `Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `
-  );
-};
+const solicitarRespuesta = (pregunta) => 
+  readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
 
 const procesarRespuesta = (respuesta, pregunta) => {
   const respuestaNumerica = Number(respuesta.trim()); // Asegura que la respuesta sea numérica y no tenga espacios
-  if (isNaN(respuestaNumerica)) {
+  if (Number.isNaN(respuestaNumerica)) {
     console.log('Respuesta inválida. Debe ser un número.');
     fallas += 1; // Aumenta el número de fallas si la respuesta no es válida
     return false; // Indica que la respuesta fue inválida
@@ -34,11 +27,11 @@ const procesarRespuesta = (respuesta, pregunta) => {
     console.log('¡Correcto!');
     aciertos += 1; // Reemplazado ++ por += 1
     return true; // Indica que la respuesta fue correcta
-  } else {
-    console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
-    fallas += 1; // Reemplazado ++ por += 1
-    return false; // Indica que la respuesta fue incorrecta
   }
+
+  console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
+  fallas += 1; // Reemplazado ++ por += 1
+  return false; // Indica que la respuesta fue incorrecta
 };
 
 const jugar = () => {
@@ -49,21 +42,20 @@ const jugar = () => {
 
   const preguntas = generarPreguntas(3); // Número de preguntas a 3
 
-  for (const pregunta of preguntas) {
+  preguntas.forEach((pregunta) => {
     const respuesta = solicitarRespuesta(pregunta);
     if (respuesta.trim() === '') { // Verifica si la respuesta está vacía
       console.log('No has proporcionado una respuesta.');
       fallas += 1; // Aumenta el número de fallas si la respuesta está vacía
-      continue; // Continúa al siguiente ciclo sin aumentar aciertos
+      if (fallas >= 1) return; // Sale del ciclo si hay 1 o más fallas
     }
 
     if (!procesarRespuesta(respuesta, pregunta)) {
-      // Si la respuesta es incorrecta o inválida, se detiene el juego
-      if (fallas >= 1) break; // Sale del ciclo si hay 1 o más fallas
+      if (fallas >= 1) return; // Sale del ciclo si hay 1 o más fallas
     }
 
-    if (aciertos === 3) break; // Sale del ciclo si hay 3 aciertos
-  }
+    if (aciertos === 3) return; // Sale del ciclo si hay 3 aciertos
+  });
 
   // Mensajes finales según los resultados
   if (aciertos === 3) {
