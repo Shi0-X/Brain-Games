@@ -7,13 +7,7 @@ const getRandomNumber = () => Math.floor(Math.random() * 100);
 const isEven = (number) => number % 2 === 0;
 
 // Función para obtener la respuesta del usuario
-const getUserAnswer = () => {
-  let answer;
-  do {
-    answer = readlineSync.question('Tu respuesta: ').toLowerCase();
-  } while (answer !== 'yes' && answer !== 'no');
-  return answer;
-};
+const getUserAnswer = () => readlineSync.question('Tu respuesta: ').toLowerCase();
 
 // Función para verificar la respuesta del usuario
 const checkAnswer = (userAnswer, correctAnswer) => {
@@ -35,9 +29,9 @@ const playParityGame = () => {
 
   let correctAnswers = 0;
   const maxCorrectAnswers = 3;
-  const maxIncorrectAnswers = 1;
+  const maxIncorrectAnswers = 1; // Modificado para finalizar después de 1 error
 
-  while (correctAnswers < maxCorrectAnswers) {
+  while (correctAnswers < maxCorrectAnswers) { // Cambiado para finalizar al alcanzar 3 respuestas correctas
     const number = getRandomNumber();
     console.log(`Pregunta: ${number}`);
     const userAnswer = getUserAnswer();
@@ -48,15 +42,16 @@ const playParityGame = () => {
       correctAnswers += 1;
     } else {
       console.log(`Lo siento, ${name}. Has fallado. El juego ha terminado.`);
-      return; // Salir del juego si se falla
+      return; // Añadido para finalizar el juego inmediatamente después de un error
     }
 
     // Verificar si se debe terminar el juego por alcanzar 3 respuestas correctas
     if (correctAnswers === maxCorrectAnswers) {
       console.log(`¡Felicidades, ${name}, Terminaste el juego con 3 respuestas correctas!`);
-      return; // Salir del juego si se alcanzan 3 respuestas correctas
+      return; // Añadido para finalizar el juego inmediatamente después de 3 respuestas correctas
     }
   }
 };
 
 export default playParityGame;
+
