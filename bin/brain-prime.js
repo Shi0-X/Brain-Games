@@ -56,7 +56,7 @@ function jugar() {
   let aciertos = 0;
   let fallas = 0;
 
-  while (aciertos < 3 && fallas < 3) {
+  while (aciertos < 3 && fallas < 1) {
     const { num, respuesta, esRespuestaCorrecta } = procesarRonda();
 
     if (esRespuestaCorrecta) {
