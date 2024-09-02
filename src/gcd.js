@@ -27,15 +27,17 @@ const procesarRespuesta = (respuesta, pregunta) => {
   if (isNaN(respuestaNumerica)) {
     console.log('Respuesta inválida. Debe ser un número.');
     fallas += 1; // Aumenta el número de fallas si la respuesta no es válida
-    return;
+    return false; // Indica que la respuesta fue inválida
   }
 
   if (respuestaNumerica === pregunta.mcd) { // Reemplazado == por === y convertido respuesta a número
     console.log('¡Correcto!');
     aciertos += 1; // Reemplazado ++ por += 1
+    return true; // Indica que la respuesta fue correcta
   } else {
     console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
     fallas += 1; // Reemplazado ++ por += 1
+    return false; // Indica que la respuesta fue incorrecta
   }
 };
 
@@ -46,17 +48,24 @@ const jugar = () => {
   console.log('Encuentra el máximo común divisor de los números dados.');
 
   const preguntas = generarPreguntas(3); // Número de preguntas a 3
-  preguntas.forEach((pregunta) => {
+
+  for (const pregunta of preguntas) {
     const respuesta = solicitarRespuesta(pregunta);
     if (respuesta.trim() === '') { // Verifica si la respuesta está vacía
       console.log('No has proporcionado una respuesta.');
       fallas += 1; // Aumenta el número de fallas si la respuesta está vacía
-      return;
+      continue; // Continúa al siguiente ciclo sin aumentar aciertos
     }
-    procesarRespuesta(respuesta, pregunta);
-    if (aciertos === 3 || fallas === 1) return;
-  });
 
+    if (!procesarRespuesta(respuesta, pregunta)) {
+      // Si la respuesta es incorrecta o inválida, se detiene el juego
+      if (fallas >= 1) break; // Sale del ciclo si hay 1 o más fallas
+    }
+
+    if (aciertos === 3) break; // Sale del ciclo si hay 3 aciertos
+  }
+
+  // Mensajes finales según los resultados
   if (aciertos === 3) {
     console.log(`¡Felicidades, ${nombre}! Terminaste el juego!`);
   } else {
