@@ -5,7 +5,7 @@ let aciertos = 0;
 let fallas = 0;
 
 // Función para calcular el máximo común divisor (MCD)
-const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
+const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b)); // No requiere cambios aquí
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
 const generarPreguntas = (cantidad) => 
