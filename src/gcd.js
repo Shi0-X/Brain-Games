@@ -19,7 +19,7 @@ const generarPreguntas = (cantidad) => {
 };
 
 // Función para solicitar respuesta al usuario
-const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} y ${pregunta.num2}\nTu respuesta: `);
+const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\n`);
 
 // Función para procesar la respuesta del usuario
 const procesarRespuesta = (respuesta, pregunta) => {
