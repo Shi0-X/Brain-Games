@@ -3,9 +3,9 @@
 import readlineSync from 'readline-sync';
 
 function generarProgresion(longitud, diferencia, inicio, oculto) {
-  return Array.from({ length: longitud }, (_, i) =>
-    i === oculto ? '..' : inicio + i * diferencia
-  );
+  return Array.from({ length: longitud }, (_, i) => {
+    return i === oculto ? '..' : inicio + i * diferencia; // Reescribir el operador condicional
+  });
 }
 
 function obtenerDatosJuego() {
@@ -13,7 +13,12 @@ function obtenerDatosJuego() {
   const diferencia = Math.floor(Math.random() * 10) + 1;
   const inicio = Math.floor(Math.random() * 10) + 1;
   const oculto = Math.floor(Math.random() * longitud);
-  return { longitud, diferencia, inicio, oculto };
+  return {
+    longitud,
+    diferencia,
+    inicio,
+    oculto,
+  }; // Añadir salto de línea según `object-curly-newline`
 }
 
 function validarRespuesta(respuesta, respuestaCorrecta) {
@@ -45,7 +50,7 @@ function jugar() {
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 1) {
-    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego();
+    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego(); // Respetar `object-curly-newline`
     const progresion = generarProgresion(longitud, diferencia, inicio, oculto);
     const respuestaCorrecta = inicio + oculto * diferencia;
 
@@ -53,10 +58,10 @@ function jugar() {
 
     if (validarRespuesta(respuesta, respuestaCorrecta)) {
       console.log('¡Correcto!');
-      aciertos++;
+      aciertos += 1; // Reemplazo de `aciertos++` por `aciertos += 1`
     } else {
       console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${respuestaCorrecta}'.`);
-      fallas++;
+      fallas += 1; // Reemplazo de `fallas++` por `fallas += 1`
     }
   }
 
