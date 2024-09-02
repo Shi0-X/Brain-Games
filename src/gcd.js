@@ -23,7 +23,8 @@ const solicitarRespuesta = (pregunta) => {
 };
 
 const procesarRespuesta = (respuesta, pregunta) => {
-  if (Number(respuesta) === pregunta.mcd) { // Reemplazado == por === y convertido respuesta a número
+  const respuestaNumerica = Number(respuesta.trim()); // Asegura que la respuesta sea numérica y no tenga espacios
+  if (respuestaNumerica === pregunta.mcd) { // Reemplazado == por === y convertido respuesta a número
     console.log('¡Correcto!');
     aciertos += 1; // Reemplazado ++ por += 1
   } else {
@@ -41,6 +42,11 @@ const jugar = () => {
   const preguntas = generarPreguntas(3); // Número de preguntas a 3
   preguntas.forEach((pregunta) => {
     const respuesta = solicitarRespuesta(pregunta);
+    if (respuesta.trim() === '') { // Verifica si la respuesta está vacía
+      console.log('No has proporcionado una respuesta.');
+      fallas += 1; // Aumenta el número de fallas si la respuesta está vacía
+      return;
+    }
     procesarRespuesta(respuesta, pregunta);
     if (aciertos === 3 || fallas === 1) return;
   });
