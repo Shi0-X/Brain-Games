@@ -5,11 +5,11 @@ let aciertos = 0;
 let fallas = 0;
 
 // Función para calcular el máximo común divisor (MCD)
-const calcularMCD = (a, b) => b === 0 ? a : calcularMCD(b, a % b); // Línea corregida
+const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b)); // Corrección para no-confusing-arrow
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
 const generarPreguntas = (cantidad) => 
-  Array.from({ length: cantidad }, () => { // Línea corregida
+  Array.from({ length: cantidad }, () => { // Corrección para no-confusing-arrow
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     return { num1, num2, mcd: calcularMCD(num1, num2) };
