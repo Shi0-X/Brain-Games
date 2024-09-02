@@ -52,7 +52,7 @@ const jugar = () => {
     console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
   }
 
-  process.exit(0);
+  process.exit(0); // Cierra el programa después de mostrar todas las preguntas y procesar las respuestas
 };
 
 export default jugar;
