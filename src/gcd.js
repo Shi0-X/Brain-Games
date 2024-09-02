@@ -19,7 +19,7 @@ const generarPreguntas = (cantidad) => {
 };
 
 // Función para solicitar respuesta al usuario
-const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
+const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} y ${pregunta.num2}\nTu respuesta: `);
 
 // Función para procesar la respuesta del usuario
 const procesarRespuesta = (respuesta, pregunta) => {
@@ -40,11 +40,11 @@ const jugar = () => {
   console.log('Encuentra el máximo común divisor de los números dados.');
 
   const preguntas = generarPreguntas(3); // Número de preguntas a 3
-  for (const pregunta of preguntas) {
+  preguntas.forEach((pregunta) => {
     const respuesta = solicitarRespuesta(pregunta);
     procesarRespuesta(respuesta, pregunta);
-    if (aciertos === 3 || fallas === 1) break;
-  }
+    if (aciertos === 3 || fallas === 1) return;
+  });
 
   if (aciertos === 3) {
     console.log(`¡Felicidades, ${nombre}! Terminaste el juego!`);
