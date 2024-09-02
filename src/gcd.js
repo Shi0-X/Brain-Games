@@ -38,19 +38,21 @@ function jugar() {
   console.log(`¡Hola, ${nombre}!`);
   console.log('Encuentra el máximo común divisor de los números dados.');
 
-  const preguntas = generarPreguntas(3); // Cambié el número de preguntas a 3
+  const preguntas = generarPreguntas(3); // Número de preguntas a 3
   for (const pregunta of preguntas) {
     const respuesta = solicitarRespuesta(pregunta);
     procesarRespuesta(respuesta, pregunta);
     if (aciertos === 3 || fallas === 1) break;
   }
 
-  console.log(aciertos === 3 
-    ? `¡Felicidades, ${nombre}! Terminaste el juego!`  // Ajustado para incluir el nombre del jugador
-    : `¡Lo siento, ${nombre}! Recuerda que puedes volver a intentarlo, no te rindas!`
-  );
+  if (aciertos === 3) {
+    console.log(`¡Felicidades, ${nombre}! Terminaste el juego!`);
+  } else {
+    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
+  }
 
   process.exit(0);
 }
 
 export default jugar;
+
