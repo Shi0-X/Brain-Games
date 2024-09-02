@@ -1,38 +1,34 @@
-import runGame from './index.js';
 import readlineSync from 'readline-sync';
+// import runGame from './index.js'; // Eliminado porque no se utiliza
 
 let aciertos = 0;
 let fallas = 0;
 
-function calcularMCD(a, b) {
-  return b === 0 ? a : calcularMCD(b, a % b);
-}
+const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
 
-function generarPreguntas(cantidad) {
+const generarPreguntas = (cantidad) => {
   const preguntas = [];
-  for (let i = 0; i < cantidad; i++) {
+  for (let i = 0; i < cantidad; i += 1) { // Reemplazado ++ por += 1
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     preguntas.push({ num1, num2, mcd: calcularMCD(num1, num2) });
   }
   return preguntas;
-}
+};
 
-function solicitarRespuesta(pregunta) {
-  return readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
-}
+const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
 
-function procesarRespuesta(respuesta, pregunta) {
-  if (respuesta == pregunta.mcd) {
+const procesarRespuesta = (respuesta, pregunta) => {
+  if (Number(respuesta) === pregunta.mcd) { // Reemplazado == por === y convertido respuesta a número
     console.log('¡Correcto!');
-    aciertos++;
+    aciertos += 1; // Reemplazado ++ por += 1
   } else {
     console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
-    fallas++;
+    fallas += 1; // Reemplazado ++ por += 1
   }
-}
+};
 
-function jugar() {
+const jugar = () => {
   console.log('¡Bienvenido a Brain Games!');
   const nombre = readlineSync.question('¿Cuál es tu nombre? ');
   console.log(`¡Hola, ${nombre}!`);
@@ -52,7 +48,6 @@ function jugar() {
   }
 
   process.exit(0);
-}
+};
 
 export default jugar;
-

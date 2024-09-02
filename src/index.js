@@ -4,7 +4,7 @@ const roundsCount = 3;
 
 const runGame = (description, gameLogic) => {
   console.log('¡Bienvenido a Brain Games!');
-  const name = readlineSync.question('¿Cual es tu nombre? ');
+  const name = readlineSync.question('¿Cuál es tu nombre? '); // Corregida la falta de acento en "cuál"
   console.log(`¡Hola, ${name}!`);
   console.log(description);
 
@@ -25,4 +25,3 @@ const runGame = (description, gameLogic) => {
 };
 
 export default runGame;
-

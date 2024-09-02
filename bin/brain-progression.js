@@ -3,9 +3,9 @@
 import readlineSync from 'readline-sync';
 
 function generarProgresion(longitud, diferencia, inicio, oculto) {
-  return Array.from({ length: longitud }, (_, i) => {
-    return i === oculto ? '..' : inicio + i * diferencia; // Reescribir el operador condicional
-  });
+  return Array.from({ length: longitud }, (_, i) =>
+    i === oculto ? '..' : inicio + i * diferencia
+  );
 }
 
 function obtenerDatosJuego() {
@@ -17,12 +17,12 @@ function obtenerDatosJuego() {
     longitud,
     diferencia,
     inicio,
-    oculto,
-  }; // Añadir salto de línea según `object-curly-newline`
+    oculto
+  };
 }
 
 function validarRespuesta(respuesta, respuestaCorrecta) {
-  return Number(respuesta) === respuestaCorrecta; // Convertir respuesta a número antes de comparar
+  return Number(respuesta) === respuestaCorrecta;
 }
 
 function mostrarPregunta(progresion) {
@@ -50,7 +50,7 @@ function jugar() {
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 1) {
-    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego(); // Respetar `object-curly-newline`
+    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego();
     const progresion = generarProgresion(longitud, diferencia, inicio, oculto);
     const respuestaCorrecta = inicio + oculto * diferencia;
 
@@ -58,10 +58,10 @@ function jugar() {
 
     if (validarRespuesta(respuesta, respuestaCorrecta)) {
       console.log('¡Correcto!');
-      aciertos += 1; // Reemplazo de `aciertos++` por `aciertos += 1`
+      aciertos += 1;
     } else {
       console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${respuestaCorrecta}'.`);
-      fallas += 1; // Reemplazo de `fallas++` por `fallas += 1`
+      fallas += 1;
     }
   }
 

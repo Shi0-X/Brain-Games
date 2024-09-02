@@ -14,10 +14,9 @@ const checkAnswer = (userAnswer, correctAnswer) => {
   if (userAnswer === correctAnswer) {
     console.log('¡Correcto!');
     return true;
-  } else {
-    console.log(`'${userAnswer}' es una respuesta incorrecta ;(. La respuesta correcta era '${correctAnswer}'.`);
-    return false;
   }
+  console.log(`'${userAnswer}' es una respuesta incorrecta ;(. La respuesta correcta era '${correctAnswer}'.`);
+  return false;
 };
 
 // Función principal para jugar el juego
@@ -37,20 +36,16 @@ const playParityGame = () => {
     const userAnswer = getUserAnswer();
 
     const correctAnswer = isEven(number) ? 'yes' : 'no';
-    
+
     if (checkAnswer(userAnswer, correctAnswer)) {
       correctAnswers += 1;
     } else {
       console.log(`¡Intentémoslo de nuevo, ${name}!`);
       return; // Añadido para finalizar el juego inmediatamente después de un error
     }
-
-    // Verificar si se debe terminar el juego por alcanzar 3 respuestas correctas
-    if (correctAnswers === maxCorrectAnswers) {
-      console.log(`¡Felicidades, ${name}, Terminaste el juego con 3 respuestas correctas!`);
-      return; // Añadido para finalizar el juego inmediatamente después de 3 respuestas correctas
-    }
   }
+
+  console.log(`¡Felicidades, ${name}, Terminaste el juego con 3 respuestas correctas!`);
 };
 
 export default playParityGame;
