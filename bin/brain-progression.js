@@ -25,11 +25,14 @@ function mostrarPregunta(progresion) {
   return readlineSync.question('Tu respuesta: ');
 }
 
-function mostrarResultado(aciertos, nombre) {
-  const mensajeFinal = aciertos === 3 
-    ? `¡Felicidades, ${nombre}!`
-    : `¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`;
-  console.log(mensajeFinal);
+function mostrarResultado(aciertos, fallas, nombre) {
+  if (fallas >= 1) {
+    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
+  } else if (aciertos === 3) {
+    console.log(`¡Felicidades, ${nombre}!`);
+  } else {
+    console.log(`¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`);
+  }
 }
 
 function jugar() {
@@ -57,7 +60,7 @@ function jugar() {
     }
   }
 
-  mostrarResultado(aciertos, nombre);
+  mostrarResultado(aciertos, fallas, nombre);
 }
 
 jugar();
