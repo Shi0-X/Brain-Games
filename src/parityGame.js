@@ -7,7 +7,13 @@ const getRandomNumber = () => Math.floor(Math.random() * 100);
 const isEven = (number) => number % 2 === 0;
 
 // Función para obtener la respuesta del usuario
-const getUserAnswer = () => readlineSync.question('Tu respuesta: ').toLowerCase();
+const getUserAnswer = () => {
+  let answer;
+  do {
+    answer = readlineSync.question('Tu respuesta: ').toLowerCase();
+  } while (answer !== 'yes' && answer !== 'no');
+  return answer;
+};
 
 // Función para verificar la respuesta del usuario
 const checkAnswer = (userAnswer, correctAnswer) => {
@@ -28,11 +34,10 @@ const playParityGame = () => {
   console.log('Responde "yes" si el número es par, de lo contrario responde "no".');
 
   let correctAnswers = 0;
-  let incorrectAnswers = 0;
   const maxCorrectAnswers = 3;
-  const maxIncorrectAnswers = 3;
+  const maxIncorrectAnswers = 1;
 
-  while (correctAnswers < maxCorrectAnswers && incorrectAnswers < maxIncorrectAnswers) {
+  while (correctAnswers < maxCorrectAnswers) {
     const number = getRandomNumber();
     console.log(`Pregunta: ${number}`);
     const userAnswer = getUserAnswer();
@@ -42,15 +47,15 @@ const playParityGame = () => {
     if (checkAnswer(userAnswer, correctAnswer)) {
       correctAnswers += 1;
     } else {
-      incorrectAnswers += 1;
-      console.log(`¡Intentémoslo de nuevo, ${name}!`);
+      console.log(`Lo siento, ${name}. Has fallado. El juego ha terminado.`);
+      return; // Salir del juego si se falla
     }
-  }
 
-  if (correctAnswers === maxCorrectAnswers) {
-    console.log(`¡Felicidades, ${name}, Terminaste el juego!`);
-  } else {
-    console.log(`Lo siento, ${name}. Has fallado ${incorrectAnswers} veces. Recuerda que siempre puedes intentarlo de nuevo.`);
+    // Verificar si se debe terminar el juego por alcanzar 3 respuestas correctas
+    if (correctAnswers === maxCorrectAnswers) {
+      console.log(`¡Felicidades, ${name}, Terminaste el juego con 3 respuestas correctas!`);
+      return; // Salir del juego si se alcanzan 3 respuestas correctas
+    }
   }
 };
 
