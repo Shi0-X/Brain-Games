@@ -1,56 +1,45 @@
-import runGame from './index.js';
-import readlineSync from 'readline-sync';
+#!/usr/bin/env node
 
-let aciertos = 0;
-let fallas = 0;
+const readline = require('readline');
 
-function calcularMCD(a, b) {
-  return b === 0 ? a : calcularMCD(b, a % b);
-}
+// Interfaz de lectura
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-function generarPreguntas(cantidad) {
-  const preguntas = [];
-  for (let i = 0; i < cantidad; i++) {
-    const num1 = Math.floor(Math.random() * 100) + 1;
-    const num2 = Math.floor(Math.random() * 100) + 1;
-    preguntas.push({ num1, num2, mcd: calcularMCD(num1, num2) });
+// Función para calcular el MCD usando el algoritmo de Euclides
+const gcd = (a, b) => {
+  while (b !== 0) {
+    [a, b] = [b, a % b];
   }
-  return preguntas;
-}
+  return a;
+};
 
-function solicitarRespuesta(pregunta) {
-  return readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
-}
+// Función para generar una pregunta
+const getQuestion = () => {
+  const num1 = Math.floor(Math.random() * 100) + 1;
+  const num2 = Math.floor(Math.random() * 100) + 1;
+  return { num1, num2 };
+};
 
-function procesarRespuesta(respuesta, pregunta) {
-  if (respuesta == pregunta.mcd) {
-    console.log('¡Correcto!');
-    aciertos++;
-  } else {
-    console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
-    fallas++;
-  }
-}
-
-function jugar() {
+// Función principal del juego
+const startGame = () => {
   console.log('¡Bienvenido a Brain Games!');
-  const nombre = readlineSync.question('¿Cuál es tu nombre? ');
-  console.log(`¡Hola, ${nombre}!`);
   console.log('Encuentra el máximo común divisor de los números dados.');
 
-  const preguntas = generarPreguntas(6);
-  for (const pregunta of preguntas) {
-    const respuesta = solicitarRespuesta(pregunta);
-    procesarRespuesta(respuesta, pregunta);
-    if (aciertos === 3 || fallas === 3) break;
-  }
+  const { num1, num2 } = getQuestion();
+  const correctAnswer = gcd(num1, num2);
 
-  console.log(aciertos === 3 
-    ? `¡Felicidades, ${nombre}!` 
-    : '¡Lo siento, Recuerda que puedes volver a intentarlo, no te rindas!'
-  );
+  rl.question(`Pregunta: ${num1} ${num2}\nTu respuesta: `, (answer) => {
+    if (parseInt(answer, 10) === correctAnswer) {
+      console.log('¡Correcto!');
+    } else {
+      console.log(`'${answer}' es una respuesta incorrecta ;(. La respuesta correcta era '${correctAnswer}'.`);
+    }
+    rl.close();
+  });
+};
 
-  process.exit(0);
-}
-
-export default jugar;
+// Inicia el juego
+startGame();
