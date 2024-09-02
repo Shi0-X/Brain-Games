@@ -24,6 +24,12 @@ const solicitarRespuesta = (pregunta) => {
 
 const procesarRespuesta = (respuesta, pregunta) => {
   const respuestaNumerica = Number(respuesta.trim()); // Asegura que la respuesta sea numérica y no tenga espacios
+  if (isNaN(respuestaNumerica)) {
+    console.log('Respuesta inválida. Debe ser un número.');
+    fallas += 1; // Aumenta el número de fallas si la respuesta no es válida
+    return;
+  }
+
   if (respuestaNumerica === pregunta.mcd) { // Reemplazado == por === y convertido respuesta a número
     console.log('¡Correcto!');
     aciertos += 1; // Reemplazado ++ por += 1
