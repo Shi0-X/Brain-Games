@@ -62,11 +62,11 @@ function jugar() {
 
     if (esRespuestaCorrecta) {
       console.log('¡Correcto!');
-      aciertos++;
+      aciertos += 1;  // Reemplazo de `aciertos++` por `aciertos += 1`
     } else {
       // Ajuste en el mensaje de error para coincidir exactamente con la salida esperada
       console.log(`'${respuesta}' es incorrecto ;(. La respuesta correcta era '${esPrimo(num) ? 'yes' : 'no'}'.`);
-      fallas++;
+      fallas += 1;  // Reemplazo de `fallas++` por `fallas += 1`
     }
   }
 
