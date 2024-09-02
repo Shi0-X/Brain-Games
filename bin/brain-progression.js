@@ -27,8 +27,9 @@ function mostrarPregunta(progresion) {
 }
 
 function mostrarResultado(aciertos, nombre) {
+  // Ajuste del mensaje final para coincidir con el test
   const mensajeFinal = aciertos === 3 
-    ? `¡Felicidades ${nombre}, Terminaste el juego!` 
+    ? `¡Felicidades, ${nombre}!` // Mensaje ajustado para pasar el test
     : `¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`;
   console.log(mensajeFinal);
 }
