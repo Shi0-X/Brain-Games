@@ -20,9 +20,10 @@ function validarRespuesta(respuesta, num) {
 
 function mostrarResultadoFinal(nombre, aciertos) {
   if (aciertos === 3) {
-    console.log(`¡Felicidades, ${nombre}, Terminaste el juego!`);
+    // Ajuste en el mensaje final para coincidir exactamente con la salida esperada
+    console.log(`¡Felicidades, ${nombre}!`);
   } else {
-    console.log(`¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`);
+    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
   }
 }
 
@@ -63,7 +64,8 @@ function jugar() {
       console.log('¡Correcto!');
       aciertos++;
     } else {
-      console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${esPrimo(num) ? 'yes' : 'no'}'.`);
+      // Ajuste en el mensaje de error para coincidir exactamente con la salida esperada
+      console.log(`'${respuesta}' es incorrecto ;(. La respuesta correcta era '${esPrimo(num) ? 'yes' : 'no'}'.`);
       fallas++;
     }
   }
