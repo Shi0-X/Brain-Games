@@ -8,12 +8,12 @@ let fallas = 0;
 const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) =>
-  Array.from({ length: cantidad }, () => { 
+const generarPreguntas = (cantidad) => 
+  Array.from({ length: cantidad }, () => {
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     return { num1, num2, mcd: calcularMCD(num1, num2) };
-  });
+  }); // Eliminados los espacios al final de la línea
 
 // Solicitar una respuesta al usuario
 const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
