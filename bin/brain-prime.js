@@ -4,7 +4,7 @@ import readlineSync from 'readline-sync';
 
 function esPrimo(num) {
   if (num <= 1) return false;
-  for (let i = 2; i * i <= num; i++) {
+  for (let i = 2; i * i <= num; i+= 1) {
     if (num % i === 0) return false;
   }
   return true;
