@@ -31,6 +31,7 @@ const startGame = () => {
   const { num1, num2 } = getQuestion();
   const correctAnswer = gcd(num1, num2);
 
+<<<<<<< HEAD
   rl.question(`Pregunta: ${num1} ${num2}\nTu respuesta: `, (answer) => {
     if (parseInt(answer, 10) === correctAnswer) {
       console.log('¡Correcto!');
@@ -40,6 +41,12 @@ const startGame = () => {
     rl.close();
   });
 };
+=======
+  console.log(aciertos === 3 
+    ? '¡Felicidades, Terminaste el juego!' 
+    : '¡Lo siento, Recuerda que puedes volver a intentarlo, no te rindas!'
+  );
+>>>>>>> parent of 179d154 (update gcd)
 
 // Inicia el juego
 startGame();
