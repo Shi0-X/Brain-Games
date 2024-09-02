@@ -8,16 +8,16 @@ let fallas = 0;
 const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) =>
-  Array.from({ length: cantidad }, () => {
+const generarPreguntas = (cantidad) => {
+  return Array.from({ length: cantidad }, () => {
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     return { num1, num2, mcd: calcularMCD(num1, num2) };
   });
+};
 
 // Solicitar una respuesta al usuario
-const solicitarRespuesta = (pregunta) =>
-  readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
+const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
 
 // Procesar la respuesta del usuario
 const procesarRespuesta = (respuesta, pregunta) => {
@@ -46,7 +46,7 @@ const jugar = () => {
 
   const preguntas = generarPreguntas(3);
 
-  for (const pregunta of preguntas) {
+  preguntas.forEach((pregunta) => {
     if (aciertos >= 3) {
       console.log(`¡Felicidades, ${nombre}! Has ganado el juego.`);
       process.exit(0); // Termina el juego si se tienen 3 aciertos
@@ -62,7 +62,7 @@ const jugar = () => {
     if (respuesta.trim() === '') {
       console.log('No has proporcionado una respuesta.');
       fallas += 1;
-      continue; // Continúa con la siguiente pregunta
+      return; // Salta al siguiente turno
     }
 
     const esCorrecta = procesarRespuesta(respuesta, pregunta);
@@ -71,7 +71,7 @@ const jugar = () => {
     } else {
       fallas += 1;
     }
-  }
+  });
 
   // Mensaje final si no se cumplen las condiciones de salida antes
   if (fallas >= 1) {
