@@ -6,22 +6,25 @@ let fallas = 0;
 
 // Función para calcular el máximo común divisor (MCD)
 const calcularMCD = (a, b) => {
-  while (b !== 0) {
-    const temp = b;
-    b = a % b;
-    a = temp;
+  // Uso de variables temporales para evitar la reasignación de parámetros
+  let x = a;
+  let y = b;
+
+  while (y !== 0) {
+    const temp = y;
+    y = x % y;
+    x = temp;
   }
-  return a;
+
+  return x;
 };
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) => {
-  return Array.from({ length: cantidad }, () => {
-    const num1 = Math.floor(Math.random() * 100) + 1;
-    const num2 = Math.floor(Math.random() * 100) + 1;
-    return { num1, num2, mcd: calcularMCD(num1, num2) };
-  });
-};
+const generarPreguntas = (cantidad) => Array.from({ length: cantidad }, () => {
+  const num1 = Math.floor(Math.random() * 100) + 1;
+  const num2 = Math.floor(Math.random() * 100) + 1;
+  return { num1, num2, mcd: calcularMCD(num1, num2) };
+});
 
 // Solicitar una respuesta al usuario
 const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
@@ -35,13 +38,9 @@ const procesarRespuesta = (respuesta, pregunta) => {
     return false;
   }
 
-  if (respuestaNumerica === pregunta.mcd) {
-    console.log('¡Correcto!');
-    return true;
-  }
-
-  console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
-  return false;
+  return respuestaNumerica === pregunta.mcd
+    ? (console.log('¡Correcto!'), true)
+    : (console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`), false);
 };
 
 // Función principal del juego
