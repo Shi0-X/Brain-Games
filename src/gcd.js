@@ -6,16 +6,13 @@ let fallas = 0;
 
 // Función para calcular el máximo común divisor (MCD)
 const calcularMCD = (a, b) => {
-  // Uso de variables temporales para evitar la reasignación de parámetros
   let x = a;
   let y = b;
-
   while (y !== 0) {
     const temp = y;
     y = x % y;
     x = temp;
   }
-
   return x;
 };
 
@@ -38,6 +35,7 @@ const procesarRespuesta = (respuesta, pregunta) => {
     return false;
   }
 
+  // Usar el operador condicional para simplificar la expresión
   return respuestaNumerica === pregunta.mcd
     ? (console.log('¡Correcto!'), true)
     : (console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`), false);
