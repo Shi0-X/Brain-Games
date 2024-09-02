@@ -19,7 +19,7 @@ function obtenerDatosJuego() {
     longitud,
     diferencia,
     inicio,
-    oculto, // Trailing comma added here
+    oculto
   };
 }
 
