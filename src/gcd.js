@@ -8,7 +8,7 @@ let fallas = 0;
 const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b)); // No requiere cambios aquí
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) =>
+const generarPreguntas = (cantidad) => 
   Array.from({ length: cantidad }, () => { // Corrección para no-confusing-arrow
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
