@@ -46,7 +46,7 @@ function jugar() {
   }
 
   console.log(aciertos === 3 
-    ? '¡Felicidades, Terminaste el juego!' 
+    ? `¡Felicidades, ${nombre}!` 
     : '¡Lo siento, Recuerda que puedes volver a intentarlo, no te rindas!'
   );
 
