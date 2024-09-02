@@ -25,18 +25,15 @@ const procesarRespuesta = (respuesta, pregunta) => {
 
   if (Number.isNaN(respuestaNumerica)) {
     console.log('Respuesta inválida. Debe ser un número.');
-    fallas += 1;
     return false;
   }
 
   if (respuestaNumerica === pregunta.mcd) {
     console.log('¡Correcto!');
-    aciertos += 1;
     return true;
   }
 
   console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`);
-  fallas += 1;
   return false;
 };
 
@@ -49,36 +46,41 @@ const jugar = () => {
 
   const preguntas = generarPreguntas(3);
 
-  preguntas.forEach(pregunta => {
+  for (const pregunta of preguntas) {
+    if (aciertos >= 3) {
+      console.log(`¡Felicidades, ${nombre}! Has ganado el juego.`);
+      process.exit(0); // Termina el juego si se tienen 3 aciertos
+    }
+
+    if (fallas >= 1) {
+      console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
+      process.exit(0); // Termina el juego si se incurre en 1 falla
+    }
+
     const respuesta = solicitarRespuesta(pregunta);
 
     if (respuesta.trim() === '') {
       console.log('No has proporcionado una respuesta.');
       fallas += 1;
-      if (fallas >= 1) {
-        return; // Termina el juego si hay una falla
-      }
-      return; // Continua con la siguiente pregunta
+      continue; // Continúa con la siguiente pregunta
     }
 
-    if (!procesarRespuesta(respuesta, pregunta)) {
-      if (fallas >= 1) {
-        return; // Termina el juego si hay una falla
-      }
+    const esCorrecta = procesarRespuesta(respuesta, pregunta);
+    if (esCorrecta) {
+      aciertos += 1;
+    } else {
+      fallas += 1;
     }
-
-    if (aciertos === 3) {
-      return; // Termina el juego si se tienen 3 aciertos
-    }
-  });
-
-  if (aciertos === 3) {
-    console.log(`¡Felicidades, ${nombre}! Terminaste el juego!`);
-  } else {
-    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
   }
 
-  process.exit(0);
+  // Mensaje final si no se cumplen las condiciones de salida antes
+  if (fallas >= 1) {
+    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
+  } else if (aciertos >= 3) {
+    console.log(`¡Felicidades, ${nombre}! Has ganado el juego.`);
+  }
+
+  process.exit(0); // Finaliza el juego
 };
 
 export default jugar;
