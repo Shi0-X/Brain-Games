@@ -19,7 +19,7 @@ function obtenerDatosJuego() {
     longitud,
     diferencia,
     inicio,
-    oculto
+    oculto,
   };
 }
 
@@ -56,7 +56,7 @@ function jugar() {
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 1) {
-    const { longitud, diferencia, inicio, oculto } = obtenerDatosJuego();
+    const {longitud, diferencia, inicio, oculto} = obtenerDatosJuego();
     const progresion = generarProgresion(longitud, diferencia, inicio, oculto);
     const respuestaCorrecta = inicio + oculto * diferencia;
 
