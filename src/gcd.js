@@ -5,10 +5,10 @@ let aciertos = 0;
 let fallas = 0;
 
 // Función para calcular el máximo común divisor (MCD)
-const calcularMCD = (a, b) => b === 0 ? a : calcularMCD(b, a % b);
+const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) =>
+const generarPreguntas = cantidad =>
   Array.from({ length: cantidad }, () => {
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
@@ -16,13 +16,13 @@ const generarPreguntas = (cantidad) =>
   });
 
 // Solicitar una respuesta al usuario
-const solicitarRespuesta = (pregunta) =>
+const solicitarRespuesta = pregunta =>
   readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
 
 // Procesar la respuesta del usuario
 const procesarRespuesta = (respuesta, pregunta) => {
   const respuestaNumerica = Number(respuesta.trim());
-  
+
   if (Number.isNaN(respuestaNumerica)) {
     console.log('Respuesta inválida. Debe ser un número.');
     fallas += 1;
@@ -51,19 +51,25 @@ const jugar = () => {
 
   for (const pregunta of preguntas) {
     const respuesta = solicitarRespuesta(pregunta);
-    
+
     if (respuesta.trim() === '') {
       console.log('No has proporcionado una respuesta.');
       fallas += 1;
-      if (fallas >= 1) break; // Termina el juego si hay una falla
+      if (fallas >= 1) {
+        break; // Termina el juego si hay una falla
+      }
       continue; // Continua con la siguiente pregunta
     }
 
     if (!procesarRespuesta(respuesta, pregunta)) {
-      if (fallas >= 1) break; // Termina el juego si hay una falla
+      if (fallas >= 1) {
+        break; // Termina el juego si hay una falla
+      }
     }
 
-    if (aciertos === 3) break; // Termina el juego si se tienen 3 aciertos
+    if (aciertos === 3) {
+      break; // Termina el juego si se tienen 3 aciertos
+    }
   }
 
   if (aciertos === 3) {
