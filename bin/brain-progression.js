@@ -81,4 +81,3 @@ function jugar() {
 
 jugar();
 
-// Agregue una línea en blanco al final del archivo
