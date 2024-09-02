@@ -9,12 +9,11 @@ function generarProgresion(longitud, diferencia, inicio, oculto) {
 }
 
 function obtenerDatosJuego() {
-  return {
-    longitud: Math.floor(Math.random() * 5) + 5,
-    diferencia: Math.floor(Math.random() * 10) + 1,
-    inicio: Math.floor(Math.random() * 10) + 1,
-    oculto: Math.floor(Math.random() * (Math.floor(Math.random() * 5) + 5))
-  };
+  const longitud = Math.floor(Math.random() * 5) + 5;
+  const diferencia = Math.floor(Math.random() * 10) + 1;
+  const inicio = Math.floor(Math.random() * 10) + 1;
+  const oculto = Math.floor(Math.random() * longitud);
+  return { longitud, diferencia, inicio, oculto };
 }
 
 function validarRespuesta(respuesta, respuestaCorrecta) {
@@ -27,9 +26,8 @@ function mostrarPregunta(progresion) {
 }
 
 function mostrarResultado(aciertos, nombre) {
-  // Ajuste del mensaje final para coincidir con el test
   const mensajeFinal = aciertos === 3 
-    ? `¡Felicidades, ${nombre}!` // Mensaje ajustado para pasar el test
+    ? `¡Felicidades, ${nombre}!`
     : `¡Lo siento, ${nombre}! ¡Recuerda que siempre puedes intentarlo de nuevo, no te rindas!`;
   console.log(mensajeFinal);
 }
