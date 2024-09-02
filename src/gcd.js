@@ -9,7 +9,7 @@ const calcularMCD = (a, b) => (b === 0 ? a : calcularMCD(b, a % b));
 
 // Generar un array de preguntas con números aleatorios y sus MCDs
 const generarPreguntas = (cantidad) =>
-  Array.from({ length: cantidad }, () => {
+  Array.from({ length: cantidad }, () => { 
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
     return { num1, num2, mcd: calcularMCD(num1, num2) };
