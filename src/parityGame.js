@@ -41,7 +41,7 @@ const playParityGame = () => {
     if (checkAnswer(userAnswer, correctAnswer)) {
       correctAnswers += 1;
     } else {
-      console.log(`Lo siento, ${name}. Has fallado. El juego ha terminado.`);
+      console.log(`¡Intentémoslo de nuevo, ${name}!`);
       return; // Añadido para finalizar el juego inmediatamente después de un error
     }
 
@@ -54,4 +54,3 @@ const playParityGame = () => {
 };
 
 export default playParityGame;
-
