@@ -17,7 +17,7 @@ function obtenerDatosJuego() {
 }
 
 function validarRespuesta(respuesta, respuestaCorrecta) {
-  return respuesta == respuestaCorrecta;
+  return Number(respuesta) === respuestaCorrecta; // Convertir respuesta a número antes de comparar
 }
 
 function mostrarPregunta(progresion) {
