@@ -15,11 +15,11 @@ function obtenerDatosJuego() {
   const diferencia = Math.floor(Math.random() * 10) + 1;
   const inicio = Math.floor(Math.random() * 10) + 1;
   const oculto = Math.floor(Math.random() * longitud);
-  return { 
-    longitud, 
-    diferencia, 
-    inicio, 
-    oculto 
+  return {
+    longitud,
+    diferencia,
+    inicio,
+    oculto,
   };
 }
 
@@ -56,11 +56,11 @@ function jugar() {
   let fallas = 0;
 
   while (aciertos < 3 && fallas < 1) {
-    const { 
-      longitud, 
-      diferencia, 
-      inicio, 
-      oculto 
+    const {
+      longitud,
+      diferencia,
+      inicio,
+      oculto,
     } = obtenerDatosJuego();
     const progresion = generarProgresion(longitud, diferencia, inicio, oculto);
     const respuestaCorrecta = inicio + oculto * diferencia;
@@ -80,3 +80,5 @@ function jugar() {
 }
 
 jugar();
+
+// Agregue una línea en blanco al final del archivo
