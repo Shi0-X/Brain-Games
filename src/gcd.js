@@ -49,28 +49,28 @@ const jugar = () => {
 
   const preguntas = generarPreguntas(3);
 
-  for (const pregunta of preguntas) {
+  preguntas.forEach(pregunta => {
     const respuesta = solicitarRespuesta(pregunta);
 
     if (respuesta.trim() === '') {
       console.log('No has proporcionado una respuesta.');
       fallas += 1;
       if (fallas >= 1) {
-        break; // Termina el juego si hay una falla
+        return; // Termina el juego si hay una falla
       }
-      continue; // Continua con la siguiente pregunta
+      return; // Continua con la siguiente pregunta
     }
 
     if (!procesarRespuesta(respuesta, pregunta)) {
       if (fallas >= 1) {
-        break; // Termina el juego si hay una falla
+        return; // Termina el juego si hay una falla
       }
     }
 
     if (aciertos === 3) {
-      break; // Termina el juego si se tienen 3 aciertos
+      return; // Termina el juego si se tienen 3 aciertos
     }
-  }
+  });
 
   if (aciertos === 3) {
     console.log(`¡Felicidades, ${nombre}! Terminaste el juego!`);
