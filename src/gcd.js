@@ -1,8 +1,6 @@
-import readlineSync from 'readline-sync';
+// gcd.js
 
-// Contadores de aciertos y fallas
-let aciertos = 0;
-let fallas = 0;
+import runGame from './index.js'; // Importar runGame desde index.js
 
 // Función para calcular el máximo común divisor (MCD)
 const calcularMCD = (a, b) => {
@@ -16,75 +14,27 @@ const calcularMCD = (a, b) => {
   return x;
 };
 
-// Generar un array de preguntas con números aleatorios y sus MCDs
-const generarPreguntas = (cantidad) => Array.from({ length: cantidad }, () => {
+// Generar una pregunta con números aleatorios y su MCD
+const generarPregunta = () => {
   const num1 = Math.floor(Math.random() * 100) + 1;
   const num2 = Math.floor(Math.random() * 100) + 1;
-  return { num1, num2, mcd: calcularMCD(num1, num2) };
-});
+  const question = `${num1} ${num2}`;
+  const answer = String(calcularMCD(num1, num2)); // Convertimos la respuesta a cadena
 
-// Solicitar una respuesta al usuario
-const solicitarRespuesta = (pregunta) => readlineSync.question(`Pregunta: ${pregunta.num1} ${pregunta.num2}\nTu respuesta: `);
-
-// Procesar la respuesta del usuario
-const procesarRespuesta = (respuesta, pregunta) => {
-  const respuestaNumerica = Number(respuesta.trim());
-
-  if (Number.isNaN(respuestaNumerica)) {
-    console.log('Respuesta inválida. Debe ser un número.');
-    return false;
-  }
-
-  // Usar el operador condicional para simplificar la expresión
-  return respuestaNumerica === pregunta.mcd
-    ? (console.log('¡Correcto!'), true)
-    : (console.log(`'${respuesta}' es una respuesta incorrecta ;(. La respuesta correcta era '${pregunta.mcd}'.`), false);
+  return { question, answer };
 };
 
-// Función principal del juego
-const jugar = () => {
-  console.log('¡Bienvenido a Brain Games!');
-  const nombre = readlineSync.question('¿Cuál es tu nombre? ');
-  console.log(`¡Hola, ${nombre}!`);
-  console.log('Encuentra el máximo común divisor de los números dados.');
-
-  const preguntas = generarPreguntas(3);
-
-  preguntas.forEach((pregunta) => {
-    if (aciertos >= 3) {
-      console.log(`¡Felicidades, ${nombre}! Has ganado el juego.`);
-      process.exit(0); // Termina el juego si se tienen 3 aciertos
-    }
-
-    if (fallas >= 1) {
-      console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
-      process.exit(0); // Termina el juego si se incurre en 1 falla
-    }
-
-    const respuesta = solicitarRespuesta(pregunta);
-
-    if (respuesta.trim() === '') {
-      console.log('No has proporcionado una respuesta.');
-      fallas += 1;
-      return; // Salta al siguiente turno
-    }
-
-    const esCorrecta = procesarRespuesta(respuesta, pregunta);
-    if (esCorrecta) {
-      aciertos += 1;
-    } else {
-      fallas += 1;
-    }
-  });
-
-  // Mensaje final si no se cumplen las condiciones de salida antes
-  if (fallas >= 1) {
-    console.log(`¡Intentémoslo de nuevo, ${nombre}!`);
-  } else if (aciertos >= 3) {
-    console.log(`¡Felicidades, ${nombre}! Has ganado el juego.`);
-  }
-
-  process.exit(0); // Finaliza el juego
+// Lógica específica del juego para encontrar el MCD
+const gameLogic = () => {
+  const { question, answer } = generarPregunta();
+  return {
+    question,
+    answer,
+  };
 };
 
-export default jugar;
+// Descripción del juego
+const description = 'Encuentra el máximo común divisor de los números dados.';
+
+// Exportar la función del juego usando runGame
+export default () => runGame(description, gameLogic);
