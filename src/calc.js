@@ -1,4 +1,6 @@
-import runGame from './index.js';
+// calc.js
+
+import runGame from './index.js'; // No necesitamos importar greetUser aquí
 
 // Función para obtener un número entero aleatorio en el rango [1, max]
 const getRandomInt = (max) => Math.floor(Math.random() * max) + 1;

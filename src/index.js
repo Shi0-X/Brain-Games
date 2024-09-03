@@ -1,11 +1,18 @@
+// index.js
+
 import readlineSync from 'readline-sync';
+
+export const greetUser = () => {
+  console.log('¡Bienvenido a Brain Games!');
+  const name = readlineSync.question('¿Cuál es tu nombre? ');
+  console.log(`¡Hola, ${name}!`);
+  return name;
+};
 
 const roundsCount = 3;
 
 const runGame = (description, gameLogic) => {
-  console.log('¡Bienvenido a Brain Games!');
-  const name = readlineSync.question('¿Cuál es tu nombre? '); // Corregida la falta de acento en "cuál"
-  console.log(`¡Hola, ${name}!`);
+  const name = greetUser(); // Usar la función greetUser para el saludo
   console.log(description);
 
   for (let i = 0; i < roundsCount; i += 1) {
