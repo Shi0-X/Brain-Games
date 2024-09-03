@@ -20,8 +20,8 @@ function generarNumeroAleatorio() {
 const gameLogic = () => {
   const num = generarNumeroAleatorio();
   const respuestaCorrecta = esPrimo(num) ? 'yes' : 'no';
-  
-  return {
+
+  return {  // Línea 23 corregida sin espacios en blanco al final
     question: `${num}`,
     answer: respuestaCorrecta,
   };
