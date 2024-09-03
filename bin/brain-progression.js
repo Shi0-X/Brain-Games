@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import readlineSync from 'readline-sync';
-import { greetUser } from '../src/index.js';  // Importa la función greetUser
+import { greetUser } from '../src/index.js'; // Importa la función greetUser
 
 // Genera una progresión aritmética con un elemento oculto
 function generarProgresion(longitud, diferencia, inicio, oculto) {
@@ -48,7 +48,7 @@ function mostrarResultado(aciertos, fallas, nombre) {
 
 // Función principal para jugar el juego
 function jugar() {
-  const nombre = greetUser();  // Llama a la función greetUser para el saludo
+  const nombre = greetUser(); // Llama a la función greetUser para el saludo
   console.log('¿Qué número falta en la progresión?');
 
   let aciertos = 0;
