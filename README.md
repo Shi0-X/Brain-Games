@@ -19,7 +19,7 @@ Asciinema para grabación de demostraciones
 Instrucciones de Instalación y Ejecución
 
 Clona el repositorio:
-git clone https://github.com/tuusuario/brain-games.git
+git clone https://github.com/Shi0-X/Brain-Games/brain-games.git
 cd brain-games
 Instala las dependencias:
 npm install
