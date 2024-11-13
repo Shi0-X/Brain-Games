@@ -5,7 +5,6 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5458039c6b4cb1634031/maintainability)](https://codeclimate.com/github/Shi0-X/fullstack-project-98/maintainability)
 
-Proyecto: Brain Games
 Descripción del Proyecto
 Brain Games es una colección de juegos de consola interactivos diseñados para desafiar al usuario en lógica y matemáticas. Los juegos incluyen verificación de paridad, calculadora de expresiones, máximo común divisor, progresión aritmética, y verificación de números primos.
 
